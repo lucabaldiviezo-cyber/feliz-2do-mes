@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Segundo Mes❤️</title>
+    <!-- Fuente Retro Pixel -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            image-rendering: pixelated; 
+        }
+
+        :root {
+            --pink-nana: #ff2a70;
+            --pink-light: #ff7eb3;
+            --purple-satc: #8a2be2;
+            --yellow-glow: #ffe66d;
+            --dark-bg: #0d0614;
+            --white-pixel: #fffdfa;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- CAPAS DE FONDO Y EFECTOS --- */
+        #bgCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 20;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        .crt-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.85) 100%);
+            z-index: 19;
+            pointer-events: none;
+        }
+
+        .room-tag {
+            position: absolute;
+            bottom: 15px; left: 20px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 21;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        /* --- INTRO SHOWCASE --- */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 6, 20, 0.92);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.8s ease;
+        }
+
+        .splash-card {
+            background: rgba(10, 5, 18, 0.85);
+            border: 4px solid var(--pink-nana);
+            padding: 30px;
+            max-width: 500px;
+            width: 85%;
+            box-shadow: 0 0 35px rgba(255, 42, 112, 0.6);
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+
+        .splash-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            animation: bounceIcon 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes bounceIcon {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-12px) scale(1.15); }
+        }
+
+        .skip-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 101;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 8px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+
+        .skip-btn:hover { opacity: 1; background: rgba(255, 42, 112, 0.6); }
+
+        /* --- UI / PANTALLAS --- */
+        .screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding: 25px;
+            z-index: 5;
+            
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05) translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1) translateY(0);
+        }
+
+        .floating-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            line-height: 1.6;
+            text-shadow: 
+                3px 3px 0px var(--pink-nana),
+                -3px -3px 0px var(--purple-satc),
+                0 0 20px rgba(255, 42, 112, 0.9);
+            animation: floatText 3s ease-in-out infinite, glitchTitle 6s infinite;
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes glitchTitle {
+            0%, 90%, 100% { text-shadow: 3px 3px 0px var(--pink-nana), -3px -3px 0px var(--purple-satc), 0 0 20px rgba(255, 42, 112, 0.9); }
+            93% { text-shadow: 5px 1px 0px #0ff, -5px -1px 0px var(--pink-nana); }
+            96% { text-shadow: 2px 4px 0px var(--pink-nana), -2px -4px 0px var(--purple-satc); }
+        }
+
+        p {
+            font-size: 10px;
+            line-height: 2;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 25px;
+            color: #fff0f3;
+            max-width: 85%;
+        }
+
+        /* --- BOTONES PIXEL ART --- */
+        .btn-container {
+            display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+        }
+
+        .pixel-btn {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            border: 4px solid #000;
+            padding: 16px 26px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0px 6px 0px #000;
+            transition: all 0.1s ease;
+            outline: none;
+        }
+
+        .pixel-btn::after {
+            content: '';
+            position: absolute; top: 2px; left: 2px; right: 2px; height: 45%;
+            background: rgba(255,255,255,0.4);
+            pointer-events: none;
+        }
+
+        .pixel-btn:hover {
+            background-color: var(--pink-nana);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 0px #000, 0 0 20px rgba(255, 42, 112, 0.9);
+        }
+
+        .pixel-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        .exit-btn {
+            position: absolute; top: 25px; right: 25px;
+            background-color: var(--pink-nana); color: white;
+            border: 3px solid #000; padding: 10px 14px;
+            font-family: 'Press Start 2P', cursive; font-size: 9px;
+            cursor: pointer; box-shadow: 4px 4px 0px #000;
+            transition: transform 0.2s; z-index: 25;
+        }
+
+        .exit-btn:hover { transform: scale(1.1) rotate(-3deg); background-color: #d61b58; }
+
+        /* --- GRID REGALOS --- */
+        .gifts-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 20px; max-width: 520px; width: 100%;
+        }
+
+        .gift-box {
+            background: rgba(13, 6, 20, 0.75);
+            border: 4px solid var(--pink-nana);
+            padding: 25px 12px;
+            cursor: pointer;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 6px 0px rgba(0,0,0,0.8), inset 0 0 15px rgba(255, 42, 112, 0.3);
+            position: relative;
+        }
+
+        .gift-box:hover {
+            background: rgba(255, 42, 112, 0.45);
+            border-color: #fff;
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(255, 42, 112, 0.6);
+        }
+
+        .gift-icon { font-size: 36px; animation: itemFloat 2.5s ease-in-out infinite; }
+
+        @keyframes itemFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(4deg); }
+        }
+
+        /* --- COMPONENTES PANTALLAS --- */
+        .envelope-container {
+            width: 90%; max-width: 580px;
+            background: rgba(255, 253, 250, 0.95); color: #111;
+            padding: 35px; border: 5px solid #000;
+            box-shadow: 8px 8px 0px var(--pink-nana), 0 0 25px rgba(255, 42, 112, 0.4);
+            text-align: left; max-height: 70vh; overflow-y: auto;
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+
+        .music-list { display: flex; flex-direction: column; gap: 12px; width: 95%; max-width: 500px; }
+
+        .music-item {
+            background: rgba(18, 18, 18, 0.85);
+            border: 3px solid var(--pink-nana);
+            padding: 16px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: all 0.2s; cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .music-item:hover {
+            transform: translateX(8px);
+            background: rgba(255, 42, 112, 0.5);
+            border-color: #fff;
+        }
+
+        .strawberry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px; }
+
+        .strawberry-card {
+            font-size: 38px; cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid #fff; padding: 12px;
+            transition: all 0.2s ease; box-shadow: 0 4px 0px #000;
+        }
+
+        .strawberry-card:hover {
+            transform: scale(1.15) rotate(6deg);
+            background: rgba(255, 42, 112, 0.5);
+            border-color: var(--pink-nana);
+        }
+
+        .tickets-container {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 15px; width: 95%; max-width: 580px;
+        }
+
+        .ticket-item {
+            background: rgba(255, 255, 255, 0.95); color: #111;
+            border: 3px dashed var(--purple-satc);
+            padding: 16px; font-size: 9px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .ticket-item:hover {
+            transform: rotate(-2deg) scale(1.04);
+            background: #fcf0ff;
+            border-color: var(--pink-nana);
+        }
+
+        ::-webkit-scrollbar { width: 10px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--pink-nana); border: 2px solid #000; }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+    <div class="crt-overlay"></div>
+    <div class="room-tag">ROOM 707 🍓</div>
+
+    <!-- INTRO -->
+    <div id="splash-screen">
+        <button class="skip-btn" onclick="endSplash()">SALTAR INTRO ⏩</button>
+        <div class="splash-card">
+            <div id="splash-icon" class="splash-icon">🎸</div>
+            <h2 id="splash-title" class="floating-title" style="font-size: 14px; margin-bottom: 15px;">NANA ROCK MODE</h2>
+            <p id="splash-desc">Sintiendo el ritmo de Blast & Trapnest...</p>
+        </div>
+    </div>
+
+    <!-- INICIO -->
+    <div id="screen-home" class="screen">
+        <h1 class="floating-title">FELIZ SEGUNDO MES<br>MI VIDA ❤️</h1>
+        <p>Un regalo diferente...<br>¿Lista para abrirlo??</p>
+        <div class="btn-container">
+            <button class="pixel-btn" onclick="playBeep(); goToScreen('screen-gifts')">ENTRAR ✨</button>
+            <button class="pixel-btn" style="background:#b2bec3; color:#2d3436;" onclick="playBeep(); goToScreen('screen-sad')">DENEGAR 😿</button>
+        </div>
+    </div>
+
+    <!-- TRISTE -->
+    <div id="screen-sad" class="screen">
+        <div style="font-size: 60px; margin-bottom: 20px; animation: itemFloat 2s infinite;">😿</div>
+        <h1 class="floating-title" style="color:#ff6b6b;">¡NO SEAS MALA!</h1>
+        <p>Vuelve a intentarlo, prometo que te va a gustar...</p>
+        <button class="pixel-btn" onclick="playBeep(); goToScreen('screen-home')">ESTÁ BIEN 💕</button>
+    </div>
+
+    <!-- SELECCIÓN REGALOS -->
+    <div id="screen-gifts" class="screen">
+        <h1 class="floating-title" style="font-size: 16px;">ELIGE TU REGALO 🍓</h1>
+        <div class="gifts-grid">
+            <div class="gift-box" onclick="playBeep(); goToScreen('screen-letter')">
+                <div class="gift-icon">💌</div>
+                <div style="font-size: 10px;">OTRA CARTA? SI OTRA CARTA</div>
+            </div>
+            <div class="gift-box" onclick="playBeep(); goToScreen('screen-music')">
+                <div class="gift-icon">🎸</div>
+                <div style="font-size: 10px;">PLAYLIST</div>
+            </div>
+            <div class="gift-box" onclick="playBeep(); goToScreen('screen-game')">
+                <div class="gift-icon">🍓</div>
+                <div style="font-size: 10px;">MINIJUEGO</div>
+            </div>
+            <div class="gift-box" onclick="playBeep(); goToScreen('screen-tickets')">
+                <div class="gift-icon">🍸</div>
+                <div style="font-size: 10px;">VALES LUCA</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTA -->
+    <div id="screen-letter" class="screen">
+        <button class="exit-btn" onclick="playBeep(); goToScreen('screen-gifts')">VOLVER ✖</button>
+        <div class="envelope-container">
+            <h3 style="color:var(--pink-nana); font-size: 11px; margin-bottom: 18px; text-shadow: none;">"Oye, ¿te acuerdas de cuando nos conocimos?..."</h3>
+            <p style="font-family: monospace; color:#222; font-size: 12px; text-shadow:none; line-height: 1.8; margin-bottom:0;">
+                No sé muy bien cómo empezar esta carta, pero si algo me ha enseñado la vida es que encontrar a alguien con quien conectar de esta manera es algo único en el mundo. 
+                <br><br>
+                Eres mi persona favorita, mi lugar seguro, y la mejor compañía para cualquier plan (desde ver un anime acurrucados hasta una noche de películas y risas). 
+                <br><br>
+                Gracias por ser exactamente como eres y por alegrar todos mis días. ¡Feliz segundo mes, mi vida! Te amo con todo mi corazón. ❤️✨
+            </p>
+        </div>
+    </div>
+
+    <!-- MÚSICA -->
+    <div id="screen-music" class="screen">
+        <button class="exit-btn" onclick="playBeep(); goToScreen('screen-gifts')">VOLVER ✖</button>
+        <h1 class="floating-title" style="font-size: 14px;">MI MUSICA FAVORITA ES TU RISA IGUAL 🎧</h1>
+        <p style="font-size: 9px; margin-bottom: 15px;">Las canciones que siempre me recuerdan a ti:</p>
+        <div class="music-list">
+            <div class="music-item" onclick="playSong('')">
+                <a href="https://youtu.be/PgqNUJN843w"
+                <span style="font-size: 10px;">🌹 Si me pides</span>
+                <span style="font-size: 16px;">▶️</span>
+            </div>
+            <div class="music-item" onclick="playSong('')">
+                <a href="https://youtu.be/HSaba23uce0"
+                <span style="font-size: 10px;">✨ Jazmin</span>
+                <span style="font-size: 16px;">▶️</span>
+            </div>
+            <div class="music-item" onclick="playSong('')">
+                <a href="https://youtu.be/0vTopF6wwZg"
+                <span style="font-size: 10px;">🍸 Amigos?</span>
+                <span style="font-size: 16px;">▶️</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MINIJUEGO -->
+    <div id="screen-game" class="screen">
+        <button class="exit-btn" onclick="playBeep(); goToScreen('screen-gifts')">VOLVER ✖</button>
+        <h1 class="floating-title" style="font-size: 13px;">ENCUENTRA EL VASO DE FRESA 🍓</h1>
+        <p>Uno de estos vasos tiene tu regalo.<br>¡Elige uno!</p>
+        <div class="strawberry-grid" id="strawGrid"></div>
+    </div>
+
+    <!-- JUEGO PERDER -->
+    <div id="screen-game-lose" class="screen">
+        <div style="font-size: 55px; margin-bottom: 15px;">💔</div>
+        <h1 class="floating-title" style="color:#ff6b6b; font-size: 13px;">¡ESTE VASO ESTABA VACÍO!</h1>
+        <p>¡Inténtalo otra vez!</p>
+        <button class="pixel-btn" onclick="playBeep(); goToScreen('screen-game'); setupGame();">REINTENTAR ⚡</button>
+    </div>
+
+    <!-- PANCARTA GANAR REDISEÑADA CON WOW FACTOR -->
+    <div id="screen-game-win" class="screen">
+        <div style="margin-top: 250px; display: flex; gap: 15px; justify-content: center; width: 100%;">
+            <button class="pixel-btn" onclick="playBeep(); goToScreen('screen-final')">VER FINAL ❤️</button>
+            <button class="pixel-btn" style="background:#4a2337; color:#fff;" onclick="playBeep(); goToScreen('screen-game'); setupGame();">JUGAR DE NUEVO 🔄</button>
+        </div>
+    </div>
+
+    <!-- TICKETS -->
+    <div id="screen-tickets" class="screen">
+        <button class="exit-btn" onclick="playBeep(); goToScreen('screen-gifts')">VOLVER ✖</button>
+        <h1 class="floating-title" style="font-size: 13px;">VALES PARA CUANDO QUIERAS" 🍸</h1>
+        <p style="font-size: 9px;">Válidos para canjear cuando quieras:</p>
+        <div class="tickets-container">
+            <div class="ticket-item"><span>🍸 Comida Casera</span><span style="color:var(--pink-nana); margin-left:8px;">#01</span></div>
+            <div class="ticket-item"><span>🛍️ Noche de antojo cumplido</span><span style="color:var(--pink-nana); margin-left:8px;">#02</span></div>
+            <div class="ticket-item"><span>🍕 Maratón de Cine & Pizza</span><span style="color:var(--pink-nana); margin-left:8px;">#03</span></div>
+            <div class="ticket-item"><span>🌹 Cita romántica sorpresa</span><span style="color:var(--pink-nana); margin-left:8px;">#04</span></div>
+            <div class="ticket-item"><span>💆‍♀️ Masaje relajante VIP</span><span style="color:var(--pink-nana); margin-left:8px;">#05</span></div>
+            <div class="ticket-item"><span>✨ Besitos y abrazos infinitos</span><span style="color:var(--pink-nana); margin-left:8px;">#06</span></div>
+        </div>
+    </div>
+
+    <!-- PANTALLA FINAL -->
+    <div id="screen-final" class="screen">
+        <div style="font-size: 55px; margin-bottom: 20px; animation: itemFloat 2s infinite;">❤️🍓</div>
+        <h1 class="floating-title">ERES MI PERSONA FAVORITA</h1>
+        <p>En un mundo lleno de gente, vos sos mi coincidencia más bonita.<br>¡Feliz Segundo Mes!</p>
+        <h2 style="font-size: 16px; color: var(--pink-nana); text-shadow: 2px 2px 0 #000; margin-bottom: 25px;">TE AMO DEMASIADO ❤️</h2>
+        <button class="pixel-btn" onclick="playBeep(); goToScreen('screen-home')">VOLVER AL INICIO 🔄</button>
+    </div>
+
+    <script>
+        // SINTETIZADOR BEEP RETRO CON SONIDOS DE VICTORIA
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playBeep() {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        function playFanfare() {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((freq, idx) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime + idx * 0.12);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.12 + 0.25);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(audioCtx.currentTime + idx * 0.12);
+                osc.stop(audioCtx.currentTime + idx * 0.12 + 0.25);
+            });
+        }
+
+        let currentAudio = null;
+        function playSong(url) {
+            if (currentAudio) currentAudio.pause();
+            if(!url || url.includes('url_cancion')) { alert('Recuerda añadir las URLs de tus canciones en el HTML.'); return; }
+            currentAudio = new Audio(url);
+            currentAudio.play().catch(e => alert('Error al reproducir audio.'));
+        }
+
+        // CONTROL INTRO
+        let currentSplashStage = 0;
+        let isSplashActive = true;
+
+        const splashStages = [
+            { icon: '🎸', title: 'ROCK MODE', desc: 'Escenario cargado con energía...', mode: 'screen-music' },
+            { icon: '🍸', title: 'SATC GLAMOUR', desc: 'Atardecer en Salta City y un Canciller listo...', mode: 'screen-tickets' },
+            { icon: '🍓', title: 'ROOM 707 COZY', desc: 'Balcón listo y fresas servidas...', mode: 'screen-gifts' }
+        ];
+
+        function nextSplashStage() {
+            if(!isSplashActive) return;
+            if(currentSplashStage >= splashStages.length) {
+                endSplash();
+                return;
+            }
+            
+            playBeep();
+            const stage = splashStages[currentSplashStage];
+            document.getElementById('splash-icon').innerText = stage.icon;
+            document.getElementById('splash-title').innerText = stage.title;
+            document.getElementById('splash-desc').innerText = stage.desc;
+            
+            currentScreenId = stage.mode;
+            currentSplashStage++;
+
+            setTimeout(nextSplashStage, 2800);
+        }
+
+        function endSplash() {
+            isSplashActive = false;
+            const splashEl = document.getElementById('splash-screen');
+            splashEl.style.opacity = '0';
+            setTimeout(() => {
+                splashEl.style.display = 'none';
+                goToScreen('screen-home');
+            }, 800);
+        }
+
+        setTimeout(nextSplashStage, 500);
+
+        // NAVEGACIÓN
+        let currentScreenId = 'screen-home';
+
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            currentScreenId = screenId;
+            if(screenId === 'screen-game-win') {
+                triggerWinEffects();
+            }
+            setTimeout(() => {
+                const target = document.getElementById(screenId);
+                if(target) target.classList.add('active');
+            }, 100);
+        }
+
+        // MINIJUEGO
+        const strawGrid = document.getElementById('strawGrid');
+        let winningIndex = 0;
+
+        function setupGame() {
+            strawGrid.innerHTML = '';
+            winningIndex = Math.floor(Math.random() * 8);
+
+            for (let i = 0; i < 8; i++) {
+                const card = document.createElement('div');
+                card.classList.add('strawberry-card');
+                card.innerHTML = '🥛';
+
+                card.addEventListener('click', () => {
+                    playBeep();
+                    if (i === winningIndex) {
+                        card.innerHTML = '🍓';
+                        setTimeout(() => goToScreen('screen-game-win'), 300);
+                    } else {
+                        goToScreen('screen-game-lose');
+                    }
+                });
+                strawGrid.appendChild(card);
+            }
+        }
+        setupGame();
+
+        // -----------------------------------------------------------------
+        // MOTOR CANVAS ULTRA-ESTÉTICO CON WOW FACTOR
+        // -----------------------------------------------------------------
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.imageSmoothingEnabled = false;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let animFrame = 0;
+        let bannerScale = 0;
+        let winConfetti = [];
+
+        function triggerWinEffects() {
+            bannerScale = 0; // Para la animación pop-up de entrada
+            playFanfare();
+            
+            // Generar partículas tipo confeti deslumbrantes
+            const icons = ['🍓', '💖', '✨', '💎', '👑', '🌹', '🍸'];
+            winConfetti = Array.from({length: 65}, () => ({
+                x: canvas.width / 2,
+                y: canvas.height / 2 - 50,
+                vx: (Math.random() - 0.5) * 18,
+                vy: (Math.random() - 0.8) * 16,
+                icon: icons[Math.floor(Math.random() * icons.length)],
+                size: Math.random() * 18 + 14,
+                rot: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 8,
+                gravity: 0.35,
+                alpha: 1
+            }));
+        }
+
+        const stars = Array.from({length: 140}, () => ({
+            x: Math.random(),
+            y: Math.random() * 0.7,
+            size: Math.random() > 0.8 ? 3 : (Math.random() > 0.4 ? 2 : 1),
+            blinkSpeed: 0.02 + Math.random() * 0.05,
+            alpha: Math.random()
+        }));
+
+        const clouds = Array.from({length: 8}, (_, i) => ({
+            x: Math.random() * 1.5 - 0.2,
+            y: 0.05 + Math.random() * 0.3,
+            scale: 0.8 + Math.random() * 0.7,
+            speed: 0.0002 + Math.random() * 0.0003
+        }));
+
+        const rain = Array.from({length: 140}, () => ({
+            x: Math.random(),
+            y: Math.random(),
+            len: Math.random() * 20 + 15,
+            speed: Math.random() * 10 + 14
+        }));
+
+        const ripples = [];
+
+        const petals = Array.from({length: 50}, () => ({
+            x: Math.random(),
+            y: Math.random(),
+            size: Math.random() * 6 + 4,
+            speedY: Math.random() * 0.0015 + 0.0008,
+            speedX: Math.random() * 0.001 - 0.0005,
+            rotation: Math.random() * Math.PI * 2,
+            rotSpeed: Math.random() * 0.05 - 0.025
+        }));
+
+        // --- PAISAJES ---
+        function drawCitySunset() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#0d001a');
+            grad.addColorStop(0.3, '#2a085c');
+            grad.addColorStop(0.55, '#6b0f8a');
+            grad.addColorStop(0.75, '#d91d73');
+            grad.addColorStop(0.9, '#f37335');
+            grad.addColorStop(1, '#ffc04d');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            const sunY = h * 0.52 + Math.sin(animFrame * 0.02) * 5;
+            ctx.save();
+            ctx.shadowColor = '#f37335';
+            ctx.shadowBlur = 40;
+            ctx.fillStyle = '#fff473';
+            ctx.beginPath();
+            ctx.arc(w * 0.5, sunY, Math.min(w, h) * 0.22, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.fillStyle = '#d91d73';
+            for(let i = 0; i < 8; i++) {
+                const lineH = 3 + i * 1.2;
+                ctx.fillRect(w * 0.2, sunY + (i * 12), w * 0.6, lineH);
+            }
+
+            ctx.fillStyle = '#20003b';
+            for(let x = 0; x < w; x += 40) {
+                const bh = 120 + Math.sin(x * 0.05) * 50;
+                ctx.fillRect(x, h - bh - 60, 36, bh + 60);
+            }
+
+            ctx.fillStyle = '#0d001a';
+            for(let x = 0; x < w; x += 60) {
+                const bh = 160 + Math.cos(x * 0.08) * 80;
+                ctx.fillRect(x, h - bh, 52, bh);
+                
+                for(let wy = h - bh + 15; wy < h - 20; wy += 20) {
+                    if ((x + wy) % 3 !== 0) {
+                        ctx.shadowColor = '#ff2a70';
+                        ctx.shadowBlur = ((x + wy + animFrame) % 40 < 20) ? 8 : 0;
+                        ctx.fillStyle = ((x + wy + animFrame) % 40 < 20) ? '#ff7eb3' : '#380242';
+                        ctx.fillRect(x + 10, wy, 10, 10);
+                        ctx.fillRect(x + 32, wy, 10, 10);
+                    }
+                }
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#0d001a';
+            }
+        }
+
+        function drawRainyStreet() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#020514');
+            grad.addColorStop(0.6, '#0a1128');
+            grad.addColorStop(1, '#1c2541');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(w * 0.18, h * 0.25, 16, h * 0.75);
+            
+            ctx.save();
+            ctx.shadowColor = '#ffe66d';
+            ctx.shadowBlur = 35;
+            ctx.fillStyle = '#ffe66d';
+            ctx.fillRect(w * 0.18 - 18, h * 0.2, 52, 28);
+            ctx.restore();
+
+            const lightGrad = ctx.createLinearGradient(w * 0.18 + 8, h * 0.23, w * 0.18 + 8, h);
+            lightGrad.addColorStop(0, 'rgba(255, 230, 109, 0.45)');
+            lightGrad.addColorStop(1, 'rgba(255, 230, 109, 0.02)');
+            ctx.fillStyle = lightGrad;
+            ctx.beginPath();
+            ctx.moveTo(w * 0.18 + 8, h * 0.23);
+            ctx.lineTo(w * 0.18 - 220, h);
+            ctx.lineTo(w * 0.18 + 236, h);
+            ctx.fill();
+
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.6)';
+            ctx.lineWidth = 2;
+            rain.forEach(r => {
+                r.y += r.speed / h;
+                if (r.y > 0.92) {
+                    if (Math.random() > 0.7) ripples.push({x: r.x * w, y: h * 0.92 + Math.random() * (h * 0.08), r: 1, alpha: 0.8});
+                    r.y = 0;
+                }
+                ctx.beginPath();
+                ctx.moveTo(r.x * w, r.y * h);
+                ctx.lineTo(r.x * w - 5, (r.y * h) + r.len);
+                ctx.stroke();
+            });
+
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                const rp = ripples[i];
+                ctx.strokeStyle = `rgba(255, 230, 109, ${rp.alpha})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.ellipse(rp.x, rp.y, rp.r * 2, rp.r, 0, 0, Math.PI * 2);
+                ctx.stroke();
+                rp.r += 0.4;
+                rp.alpha -= 0.03;
+                if (rp.alpha <= 0) ripples.splice(i, 1);
+            }
+        }
+
+        function drawRoom707() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#090117');
+            grad.addColorStop(0.5, '#22064f');
+            grad.addColorStop(1, '#520859');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            stars.forEach(s => {
+                s.alpha += s.blinkSpeed;
+                const a = (Math.sin(s.alpha) + 1) / 2;
+                ctx.fillStyle = `rgba(255, 255, 255, ${a})`;
+                ctx.fillRect(s.x * w, s.y * h, s.size, s.size);
+            });
+
+            clouds.forEach(c => {
+                c.x += c.speed;
+                if(c.x > 1.2) c.x = -0.3;
+                ctx.fillStyle = 'rgba(255, 126, 179, 0.12)';
+                ctx.beginPath();
+                ctx.arc(c.x * w, c.y * h, 45 * c.scale, 0, Math.PI * 2);
+                ctx.arc((c.x * w) + 35 * c.scale, (c.y * h) - 10, 55 * c.scale, 0, Math.PI * 2);
+                ctx.arc((c.x * w) + 75 * c.scale, c.y * h, 40 * c.scale, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.save();
+            ctx.shadowColor = '#fff';
+            ctx.shadowBlur = 45;
+            ctx.fillStyle = '#fffdfa';
+            ctx.beginPath();
+            ctx.arc(w * 0.78, h * 0.28, 65, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.fillStyle = '#07050e';
+            ctx.fillRect(0, 0, w * 0.12, h);
+            ctx.fillRect(w * 0.88, 0, w * 0.12, h);
+            ctx.fillRect(0, 0, w, h * 0.12);
+
+            ctx.fillStyle = '#161224';
+            ctx.fillRect(0, h * 0.68, w, 14);
+            for(let x = w * 0.12; x < w * 0.88; x += 26) {
+                ctx.fillRect(x, h * 0.68, 6, h * 0.14);
+            }
+            ctx.fillRect(0, h * 0.82, w, h * 0.18);
+        }
+
+        function drawSakuraSunset() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#ff7395');
+            grad.addColorStop(0.5, '#d91a60');
+            grad.addColorStop(0.85, '#2e004f');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.save();
+            ctx.shadowColor = '#ffb3c6';
+            ctx.shadowBlur = 40;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(w * 0.5, h * 0.55, 75, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.fillStyle = '#1b0033';
+            ctx.beginPath();
+            ctx.moveTo(w * 0.1, h * 0.85);
+            ctx.lineTo(w * 0.5, h * 0.32);
+            ctx.lineTo(w * 0.9, h * 0.85);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffccd5';
+            ctx.beginPath();
+            ctx.moveTo(w * 0.42, h * 0.43);
+            ctx.lineTo(w * 0.5, h * 0.32);
+            ctx.lineTo(w * 0.58, h * 0.43);
+            ctx.lineTo(w * 0.54, h * 0.47);
+            ctx.lineTo(w * 0.5, h * 0.45);
+            ctx.lineTo(w * 0.46, h * 0.48);
+            ctx.fill();
+
+            petals.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotSpeed;
+
+                if (p.y > 1) p.y = -0.05;
+                if (p.x > 1) p.x = 0;
+                if (p.x < 0) p.x = 1;
+
+                ctx.save();
+                ctx.translate(p.x * w, p.y * h);
+                ctx.rotate(p.rotation);
+                ctx.fillStyle = '#ffb3c6';
+                ctx.beginPath();
+                ctx.ellipse(0, 0, p.size, p.size * 0.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+        }
+
+        function drawRockStage() {
+            const w = canvas.width, h = canvas.height;
+            ctx.fillStyle = '#05020a';
+            ctx.fillRect(0, 0, w, h);
+
+            const spotColors = ['#ff2a70', '#8a2be2', '#ffe66d', '#00f0ff'];
+            for(let i = 0; i < 4; i++) {
+                const angle = Math.sin((animFrame * 0.03) + i) * 140;
+                ctx.save();
+                ctx.fillStyle = spotColors[i % spotColors.length];
+                ctx.globalAlpha = 0.25;
+                ctx.beginPath();
+                ctx.moveTo((i + 0.5) * (w / 4), 0);
+                ctx.lineTo(((i + 0.5) * (w / 4)) - 100 + angle, h);
+                ctx.lineTo(((i + 0.5) * (w / 4)) + 100 + angle, h);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            ctx.fillStyle = '#121212';
+            ctx.fillRect(w * 0.05, h * 0.58, 120, 150);
+            ctx.fillRect(w * 0.8, h * 0.58, 120, 150);
+
+            ctx.save();
+            ctx.shadowColor = '#ff2a70';
+            ctx.shadowBlur = (animFrame % 20 < 10) ? 15 : 2;
+            ctx.fillStyle = '#ff2a70';
+            ctx.fillRect(w * 0.05 + 10, h * 0.6, 100, 12);
+            ctx.fillRect(w * 0.8 + 10, h * 0.6, 100, 12);
+            ctx.restore();
+        }
+
+        function drawCozyKitchen() {
+            const w = canvas.width, h = canvas.height;
+            ctx.fillStyle = '#1a0c16';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = '#2d1527';
+            for(let x = 0; x < w; x += 50) {
+                for(let y = 0; y < h * 0.68; y += 30) {
+                    ctx.fillRect(x + (y % 2 === 0 ? 0 : 25), y, 46, 26);
+                }
+            }
+
+            ctx.fillStyle = '#4a2337';
+            ctx.fillRect(0, h * 0.68, w, h * 0.32);
+            ctx.fillStyle = '#ff2a70';
+            ctx.fillRect(0, h * 0.68, w, 8);
+        }
+
+        // --- PANCARTA DIBUJADA EN CANVAS CON WOW FACTOR TOTAL ---
+        function drawVictoryBanner() {
+            drawCozyKitchen(); 
+
+            const w = canvas.width, h = canvas.height;
+
+            // Animación elástica de Pop-Up
+            if (bannerScale < 1) {
+                bannerScale += (1 - bannerScale) * 0.12;
+            }
+
+            const cardW = Math.min(w * 0.88, 540);
+            const cardH = 270;
+            const cardX = (w - cardW) / 2;
+            const floatY = Math.sin(animFrame * 0.05) * 6;
+            const cardY = ((h - cardH) / 2) - 40 + floatY;
+
+            ctx.save();
+            ctx.translate(w / 2, cardY + cardH / 2);
+            ctx.scale(bannerScale, bannerScale);
+            ctx.translate(-w / 2, -(cardY + cardH / 2));
+
+            // Resplandor Neón Multicolor Vibrante
+            const neonHue = (animFrame * 3) % 360;
+            ctx.shadowColor = `hsl(${neonHue}, 100%, 60%)`;
+            ctx.shadowBlur = 40 + Math.sin(animFrame * 0.1) * 15;
+
+            // Base de la Pancarta Glossy
+            const cardGrad = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
+            cardGrad.addColorStop(0, 'rgba(25, 5, 35, 0.96)');
+            cardGrad.addColorStop(0.5, 'rgba(75, 12, 65, 0.96)');
+            cardGrad.addColorStop(1, 'rgba(15, 3, 22, 0.96)');
+            ctx.fillStyle = cardGrad;
+            ctx.fillRect(cardX, cardY, cardW, cardH);
+            ctx.restore();
+
+            ctx.save();
+            ctx.translate(w / 2, cardY + cardH / 2);
+            ctx.scale(bannerScale, bannerScale);
+            ctx.translate(-w / 2, -(cardY + cardH / 2));
+
+            // Marco Neón Cambiante
+            ctx.strokeStyle = `hsl(${neonHue}, 100%, 75%)`;
+            ctx.lineWidth = 5;
+            ctx.strokeRect(cardX + 4, cardY + 4, cardW - 8, cardH - 8);
+
+            // Bisel Dorado Interior Estilo Retro Arcade
+            ctx.strokeStyle = '#ffe66d';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(cardX + 12, cardY + 12, cardW - 24, cardH - 24);
+
+            // Esquinas Decorativas Doradas
+            const cLen = 16;
+            ctx.fillStyle = '#ffe66d';
+            ctx.fillRect(cardX + 10, cardY + 10, cLen, 4);
+            ctx.fillRect(cardX + 10, cardY + 10, 4, cLen);
+            ctx.fillRect(cardX + cardW - 10 - cLen, cardY + 10, cLen, 4);
+            ctx.fillRect(cardX + cardW - 14, cardY + 10, 4, cLen);
+
+            // Fresa Animada Flotando sobre el Título
+            const berryY = cardY + 45 + Math.sin(animFrame * 0.1) * 5;
+            ctx.font = '28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🍓', w / 2, berryY);
+
+            // TEXTO PRINCIPAL ANIMADO CON GLOW
+            ctx.font = '13px "Press Start 2P"';
+            ctx.fillStyle = '#ffe66d';
+            ctx.shadowColor = '#000';
+            ctx.shadowBlur = 8;
+            ctx.fillText('¡LO ENCONTRASTE! ✨', w / 2, cardY + 95);
+
+            // LÍNEA DIVISORA RESPLANDECIENTE
+            ctx.strokeStyle = 'rgba(255, 126, 179, 0.6)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(cardX + 40, cardY + 115);
+            ctx.lineTo(cardX + cardW - 40, cardY + 115);
+            ctx.stroke();
+
+            // MENSAJE PERSONALIZADO ROMÁNTICO
+            ctx.font = '9px "Press Start 2P"';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('Elegiste el vaso perfecto del 707.', w / 2, cardY + 145);
+
+            ctx.fillStyle = '#ff7eb3';
+            ctx.fillText('¡Siempre seremos el mejor equipo!', w / 2, cardY + 175);
+            
+            ctx.font = '10px "Press Start 2P"';
+            ctx.fillStyle = '#ffe66d';
+            ctx.fillText('Te amo con todo mi corazón ❤️', w / 2, cardY + 208);
+            
+            ctx.restore();
+
+            // RENDERIZAR CONFETI Y PARTÍCULAS WOW
+            winConfetti.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.rot += p.rotSpeed;
+                p.alpha -= 0.006;
+
+                if (p.alpha > 0) {
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(p.alpha, 0);
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rot * Math.PI) / 180);
+                    ctx.font = `${p.size}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText(p.icon, 0, 0);
+                    ctx.restore();
+                }
+            });
+        }
+
+        function drawSATCSkyline() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#03001e');
+            grad.addColorStop(0.5, '#7303c0');
+            grad.addColorStop(1, '#ec38bc');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = '#080114';
+            const towers = [160, 260, 200, 340, 180, 280, 360, 220, 170];
+            const tWidth = w / towers.length;
+
+            towers.forEach((th, i) => {
+                ctx.fillRect(i * tWidth, h - th, tWidth - 4, th);
+                
+                for(let wy = h - th + 25; wy < h - 15; wy += 22) {
+                    if ((i + wy + Math.floor(animFrame * 0.05)) % 5 !== 0) {
+                        ctx.fillStyle = (i % 2 === 0) ? '#ffe66d' : '#ec38bc';
+                        ctx.fillRect((i * tWidth) + 8, wy, 8, 12);
+                    }
+                }
+                ctx.fillStyle = '#080114';
+            });
+        }
+
+        function drawGalaxyFinal() {
+            const w = canvas.width, h = canvas.height;
+            const grad = ctx.createLinearGradient(0, 0, w, h);
+            grad.addColorStop(0, '#0a0017');
+            grad.addColorStop(0.5, '#ff2a70');
+            grad.addColorStop(1, '#3a0ca3');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            stars.forEach(s => {
+                ctx.fillStyle = '#fffdfa';
+                ctx.fillRect(s.x * w, s.y * h * 1.4, s.size, s.size);
+            });
+
+            const fx = ((animFrame * 8) % (w * 1.8)) - 200;
+            const fy = ((animFrame * 4.5) % (h * 1.8)) - 100;
+            ctx.strokeStyle = '#ffe66d';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(fx, fy);
+            ctx.lineTo(fx - 110, fy - 60);
+            ctx.stroke();
+        }
+
+        // BUCLE ANIMACIÓN
+        function renderBackground() {
+            animFrame++;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            switch (currentScreenId) {
+                case 'screen-home':
+                    drawCitySunset();
+                    break;
+                case 'screen-sad':
+                    drawRainyStreet();
+                    break;
+                case 'screen-gifts':
+                    drawRoom707();
+                    break;
+                case 'screen-letter':
+                    drawSakuraSunset();
+                    break;
+                case 'screen-music':
+                    drawRockStage();
+                    break;
+                case 'screen-game':
+                case 'screen-game-lose':
+                    drawCozyKitchen();
+                    break;
+                case 'screen-game-win':
+                    drawVictoryBanner();
+                    break;
+                case 'screen-tickets':
+                    drawSATCSkyline();
+                    break;
+                case 'screen-final':
+                    drawGalaxyFinal();
+                    break;
+                default:
+                    drawCitySunset();
+            }
+
+            requestAnimationFrame(renderBackground);
+        }
+
+        renderBackground();
+    </script>
+</body>
+</html>
