@@ -394,17 +394,13 @@
     <div id="screen-letter" class="screen">
         <button class="exit-btn" onclick="playBeep(); goToScreen('screen-gifts')">VOLVER ✖</button>
         <div class="envelope-container">
-            <h3 style="color:var(--pink-nana); font-size: 11px; margin-bottom: 18px; text-shadow: none;">"Mi Jazmin"</h3>
+            <h3 style="color:var(--pink-nana); font-size: 11px; margin-bottom: 18px; text-shadow: none;">"Oye, ¿te acuerdas de cuando nos conocimos?..."</h3>
             <p style="font-family: monospace; color:#222; font-size: 12px; text-shadow:none; line-height: 1.8; margin-bottom:0;">
-                Hoy quería escribirte desde el corazón, sin orgullo y sin miedo, porque hay algo que quiero que sepas por encima de todo: te amo. Han pasado apenas dos meses desde que nuestras vidas se cruzaron de esta manera tan especial, y aunque para algunos pueda parecer poco tiempo, para mí ha sido suficiente para darme cuenta de lo importante que sos.. 
+                No sé muy bien cómo empezar esta carta, pero si algo me ha enseñado la vida es que encontrar a alguien con quien conectar de esta manera es algo único en el mundo. 
                 <br><br>
-                Sé que últimamente hemos tenido varios problemas. Hemos discutido, nos hemos lastimado con palabras y quizás hubo momentos en los que sentimos que todo se volvía difícil. Pero si hay algo de lo que estoy completamente seguro es que no quiero alejarme de vos. No pienso rendirme por las dificultades, porque nuestro amor vale mucho más que cualquier pelea. 
+                Eres mi persona favorita, mi lugar seguro, y la mejor compañía para cualquier plan (desde ver un anime acurrucados hasta una noche de películas y risas). 
                 <br><br>
-                Gracias por cada sonrisa, por cada abrazo, por cada momento que compartimos. Gracias por hacerme sentir cosas que nunca imaginé sentir. Sos una persona muy especial para mí, y no quiero perder todo lo que estamos construyendo. ❤️✨
-                <br><br>
-                Prometo seguir luchando por nosotros, hablar cuando haga falta, pedir perdón cuando me equivoque y demostrarte cada día que mi amor por vos es sincero. Porque no quiero una historia que termine por unos malos momentos; quiero una historia donde, con el tiempo, podamos mirar atrás y decir: "Valió la pena no rendirse"
-                <br><br>
-                Te elijo hoy, mañana y todas las veces que haga falta. Porque mi lugar, mientras vos también lo quieras, es a tu lado. Te amo con todo mi corazón. ❤️
+                Gracias por ser exactamente como eres y por alegrar todos mis días. ¡Feliz segundo mes, mi vida! Te amo con todo mi corazón. ❤️✨
             </p>
         </div>
     </div>
@@ -415,21 +411,24 @@
         <h1 class="floating-title" style="font-size: 14px;">MI MUSICA FAVORITA ES TU RISA IGUAL 🎧</h1>
         <p style="font-size: 9px; margin-bottom: 15px;">Las canciones que siempre me recuerdan a ti:</p>
         <div class="music-list">
-            <div class="music-item" onclick="playSong('')">
-                <a href="https://youtu.be/PgqNUJN843w"
-                <span style="font-size: 10px;">🌹 Si me pides</span>
-                <span style="font-size: 16px;">▶️</span>
-            </div>
-            <div class="music-item" onclick="playSong('')">
-                <a href="https://youtu.be/HSaba23uce0"
-                <span style="font-size: 10px;">✨ Jazmin</span>
-                <span style="font-size: 16px;">▶️</span>
-            </div>
-            <div class="music-item" onclick="playSong('')">
-                <a href="https://youtu.be/0vTopF6wwZg"
-                <span style="font-size: 10px;">🍸 Amigos?</span>
-                <span style="font-size: 16px;">▶️</span>
-            </div>
+            <a href="https://youtu.be/PgqNUJN843w" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="music-item" onclick="playBeep()">
+                    <span style="font-size: 10px;">🌹 Si me pides</span>
+                    <span style="font-size: 16px;">▶️</span>
+                </div>
+            </a>
+            <a href="https://youtu.be/HSaba23uce0" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="music-item" onclick="playBeep()">
+                    <span style="font-size: 10px;">✨ Jazmin</span>
+                    <span style="font-size: 16px;">▶️</span>
+                </div>
+            </a>
+            <a href="https://youtu.be/0vTopF6wwZg" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="music-item" onclick="playBeep()">
+                    <span style="font-size: 10px;">🍸 Amigos?</span>
+                    <span style="font-size: 16px;">▶️</span>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -514,14 +513,6 @@
                 osc.start(audioCtx.currentTime + idx * 0.12);
                 osc.stop(audioCtx.currentTime + idx * 0.12 + 0.25);
             });
-        }
-
-        let currentAudio = null;
-        function playSong(url) {
-            if (currentAudio) currentAudio.pause();
-            if(!url || url.includes('url_cancion')) { alert('te amo, amo mi bebita.'); return; }
-            currentAudio = new Audio(url);
-            currentAudio.play().catch(e => alert('Error al reproducir audio.'));
         }
 
         // CONTROL INTRO
