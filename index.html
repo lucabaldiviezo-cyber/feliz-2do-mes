@@ -515,7 +515,7 @@
         let currentAudio = null;
         function playSong(url) {
             if (currentAudio) currentAudio.pause();
-            if(!url || url.includes('url_cancion')) { alert('Recuerda añadir las URLs de tus canciones en el HTML.'); return; }
+            if(!url || url.includes('url_cancion')) { alert('te amo, amo mi bebita.'); return; }
             currentAudio = new Audio(url);
             currentAudio.play().catch(e => alert('Error al reproducir audio.'));
         }
